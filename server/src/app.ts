@@ -7,8 +7,6 @@ app.use(express.json());
 
 connectDb();
 
-app.get("/", (_req, res) => {
-  return res.json({ message: "Hello team!" });
-});
+app.get("/", (_req, res) => res.json({ message: "Hello team!" }));
 
 export default app;

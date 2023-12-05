@@ -4,11 +4,11 @@ import app from "../src/app";
 
 const api = supertest(app);
 
-test("all persons are returned", async () => {
+test("api returns greeting", async () => {
   const res = await api.get("/");
   expect(res.body.message).toEqual("Hello team!");
 });
 
 afterAll(async () => {
-  mongoose.connection.close();
+  await mongoose.connection.close();
 });
