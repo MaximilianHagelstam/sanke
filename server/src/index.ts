@@ -1,6 +1,6 @@
 import express from "express";
-
-const PORT = 8080;
+import { PORT } from "./config/constants";
+import logger from "./config/logger";
 
 const app = express();
 
@@ -12,5 +12,5 @@ app.get("/", (_req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.info(`Server running in ${process.env.NODE_ENV} on port ${PORT}`);
+  logger.info(`Server running in ${process.env.NODE_ENV} on port ${PORT}`);
 });
