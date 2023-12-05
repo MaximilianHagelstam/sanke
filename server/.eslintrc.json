@@ -1,7 +1,8 @@
 {
   "env": {
     "es6": true,
-    "node": true
+    "node": true,
+    "jest": true
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -11,5 +12,6 @@
   "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
   "rules": {
     "prettier/prettier": "error"
-  }
+  },
+  "ignorePatterns": ["jest.config.js", "tests"]
 }
