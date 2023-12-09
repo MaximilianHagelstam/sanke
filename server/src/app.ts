@@ -3,7 +3,7 @@ import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 import { connectDb } from "./config/connectDb";
-import userRouter from "./routes/userRouter";
+import authRouter from "./routes/authRouter";
 
 const app = express();
 
@@ -14,6 +14,6 @@ app.use(cors());
 
 connectDb();
 
-app.use("/api/users", userRouter);
+app.use("/api/auth", authRouter);
 
 export default app;
