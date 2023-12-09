@@ -5,9 +5,9 @@
     "start": "cross-env NODE_ENV=production node dist/index.js",
     "dev": "cross-env NODE_ENV=development ts-node-dev --transpile-only src/index.ts",
     "build": "tsc",
-    "lint": "eslint ./src/**/*.ts",
+    "lint": "eslint ./src",
     "test": "cross-env NODE_ENV=testing jest --coverage",
-    "format": "prettier --write ./**/*.ts",
+    "format": "prettier --write ./src",
     "clean": "rm -rf coverage dist node_modules"
   },
   "dependencies": {

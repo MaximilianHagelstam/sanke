@@ -15,3 +15,10 @@ export const registerSchema = object({
       .matches(/(?=.*[0-9])/, "must contain a number"),
   }),
 });
+
+export const loginSchema = object({
+  body: object({
+    username: string().required(),
+    password: string().required(),
+  }),
+});
