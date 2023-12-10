@@ -25,6 +25,6 @@ export const auth = (req: Request, res: Response, next: NextFunction) => {
 
     return next();
   } catch (err) {
-    return res.status(401).json({ error: "invalid token" });
+    return res.status(401).json({ error: "unauthorized" });
   }
 };

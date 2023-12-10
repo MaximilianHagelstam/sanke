@@ -10,3 +10,6 @@ export const connectDb = async () => {
     logger.error(err);
   }
 };
+
+export const getAvatar = (seed: string) =>
+  `https://api.dicebear.com/7.x/notionists/svg?seed=${seed}&backgroundColor=ffffff&size=64`;
