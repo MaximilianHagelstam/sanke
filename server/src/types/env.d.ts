@@ -5,5 +5,12 @@ declare namespace NodeJS {
     DB_URL_DEV: string;
     DB_URL_PROD: string;
     DB_URL_TEST: string;
+    JWT_SECRET: string;
+  }
+}
+
+declare namespace Express {
+  export interface Request {
+    token: import("./Token").default;
   }
 }

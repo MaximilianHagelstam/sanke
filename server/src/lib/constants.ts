@@ -11,3 +11,5 @@ export const DB_URL =
     : ENV === "testing"
       ? process.env.DB_URL_TEST
       : process.env.DB_URL_DEV;
+
+export const JWT_SECRET = process.env.JWT_SECRET;
