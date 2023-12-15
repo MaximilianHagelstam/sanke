@@ -1,21 +1,15 @@
 import { ThemeToggle } from "@/components/theme-toggle";
-import { getCurrentUser } from "@/data/user";
-import { useQuery } from "@tanstack/react-query";
+import { useAuth } from "./providers/auth-provider";
 
 const App = () => {
-  const { isPending, error, data } = useQuery({
-    queryKey: ["user"],
-    queryFn: getCurrentUser,
-  });
+  const { user } = useAuth();
 
-  if (isPending) return "Loading...";
-
-  if (error) return error.message;
+  if (!user) return "Landing page";
 
   return (
     <>
       <ThemeToggle />
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      <pre>{JSON.stringify(user, null, 2)}</pre>
     </>
   );
 };

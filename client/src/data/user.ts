@@ -1,5 +1,5 @@
 import { User } from "@/interfaces/User";
-import { getUserToken } from "@/lib/user-token";
+import { getUserToken } from "@/lib/local-storage-helpers";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
