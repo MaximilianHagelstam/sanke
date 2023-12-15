@@ -27,15 +27,7 @@ export const register = async (req: Request, res: Response) => {
   });
 
   logger.info(`Registered user @${user.username}`);
-  return res.status(201).json({
-    user: {
-      _id: user._id,
-      username: user.username,
-      avatar: user.avatar,
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt,
-    },
-  });
+  return res.status(201).json({ user });
 };
 
 export const login = async (req: Request, res: Response) => {
