@@ -1,13 +1,22 @@
-import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { getCurrentUser } from "@/data/user";
+import { useQuery } from "@tanstack/react-query";
 
 const App = () => {
+  const { isPending, error, data } = useQuery({
+    queryKey: ["user"],
+    queryFn: getCurrentUser,
+  });
+
+  if (isPending) return "Loading...";
+
+  if (error) return error.message;
+
   return (
-    <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
-      <div className="h-screen bg-white dark:bg-zinc-950">
-        <ThemeToggle />
-      </div>
-    </ThemeProvider>
+    <>
+      <ThemeToggle />
+      <pre>{JSON.stringify(data, null, 2)}</pre>
+    </>
   );
 };
 
