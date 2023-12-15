@@ -1,17 +1,12 @@
 import { ThemeToggle } from "@/components/theme-toggle";
-import { useAuth } from "./providers/auth-provider";
+import { useAuth } from "@/providers/auth-provider";
 
 const App = () => {
   const { user } = useAuth();
 
-  if (!user) return "Landing page";
+  if (!user) return <ThemeToggle />;
 
-  return (
-    <>
-      <ThemeToggle />
-      <pre>{JSON.stringify(user, null, 2)}</pre>
-    </>
-  );
+  return <pre>{JSON.stringify(user, null, 2)}</pre>;
 };
 
 export default App;
