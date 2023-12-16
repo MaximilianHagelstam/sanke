@@ -1,26 +1,75 @@
 import { buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { login } from "@/data/user";
 import { cn } from "@/lib/utils";
+import { useMutation } from "@tanstack/react-query";
 import { ChevronLeft, Loader2 } from "lucide-react";
 
+type LoginFormInput = {
+  username: string;
+  password: string;
+};
+
 const LoginForm = () => {
+  const mutation = useMutation({
+    mutationFn: ({ username, password }: LoginFormInput) =>
+      login(username, password),
+  });
+
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const target = event.target as typeof event.target & {
+      username: { value: string };
+      password: { value: string };
+    };
+
+    mutation.mutate({
+      username: target.username.value,
+      password: target.password.value,
+    });
+  };
+
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <div className="grid gap-4">
         <div className="grid gap-2">
-          <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" placeholder="name@example.com" />
-          {/* <p className="px-1 text-xs text-red-600">Invalid email</p> */}
+          <Label htmlFor="username">Username</Label>
+          <Input
+            id="username"
+            name="username"
+            type="text"
+            disabled={mutation.isPending}
+          />
+          {mutation.isError && (
+            <p className="px-1 text-xs text-red-600">
+              {mutation.error.message}
+            </p>
+          )}
         </div>
         <div className="grid gap-2">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" type="password" />
-          {/* <p className="px-1 text-xs text-red-600">Invalid email</p> */}
+          <Input
+            id="password"
+            name="password"
+            type="password"
+            disabled={mutation.isPending}
+          />
+          {mutation.isError && (
+            <p className="px-1 text-xs text-red-600">
+              {mutation.error.message}
+            </p>
+          )}
         </div>
-        <button className={cn(buttonVariants())}>
-          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-          Sign In with Email
+        <button
+          type="submit"
+          className={cn(buttonVariants())}
+          disabled={mutation.isPending}
+        >
+          {mutation.isPending && (
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          )}
+          Sign In
         </button>
       </div>
     </form>
@@ -47,7 +96,7 @@ export const Login = () => {
               Welcome back
             </h1>
             <p className="text-sm text-gray-500">
-              Enter your email to sign in to your account
+              Enter your username to sign in to your account
             </p>
           </div>
           <LoginForm />
