@@ -40,6 +40,7 @@ const LoginForm = () => {
             name="username"
             type="text"
             disabled={mutation.isPending}
+            required
           />
           {mutation.isError && (
             <p className="px-1 text-xs text-red-600">
@@ -54,6 +55,7 @@ const LoginForm = () => {
             name="password"
             type="password"
             disabled={mutation.isPending}
+            required
           />
           {mutation.isError && (
             <p className="px-1 text-xs text-red-600">
