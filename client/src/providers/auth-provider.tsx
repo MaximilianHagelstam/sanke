@@ -21,6 +21,7 @@ export const AuthProvider = ({ children, ...props }: AuthProviderProps) => {
   const { data } = useQuery({
     queryKey: ["user"],
     queryFn: getCurrentUser,
+    retry: false,
   });
 
   return (
