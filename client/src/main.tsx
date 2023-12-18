@@ -1,10 +1,72 @@
-import App from "@/App";
+import { LandingPage } from "@/components/landing-page";
+import { Layout } from "@/components/layout";
+import { Login } from "@/components/login";
+import { Register } from "@/components/register";
+import { RequireAuth } from "@/components/require-auth";
+import { RequireGuest } from "@/components/require-guest";
+import "@/index.css";
+import { AuthProvider } from "@/providers/auth-provider";
+import { ThemeProvider } from "@/providers/theme-provider";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+
+const queryClient = new QueryClient();
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: (
+      <RequireGuest>
+        <Layout>
+          <LandingPage />
+        </Layout>
+      </RequireGuest>
+    ),
+  },
+  {
+    path: "/login",
+    element: (
+      <RequireGuest>
+        <Login />
+      </RequireGuest>
+    ),
+  },
+  {
+    path: "/register",
+    element: (
+      <RequireGuest>
+        <Register />
+      </RequireGuest>
+    ),
+  },
+  {
+    path: "/projects",
+    element: (
+      <RequireAuth>
+        <Layout>
+          <h1>Projects</h1>
+        </Layout>
+      </RequireAuth>
+    ),
+  },
+  {
+    path: "*",
+    element: <h1>404 - Not Found</h1>,
+  },
+]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <AuthProvider>
+          <div className="min-h-screen w-full bg-white font-sans text-slate-950 antialiased dark:bg-slate-950 dark:text-slate-50">
+            <RouterProvider router={router} />
+          </div>
+        </AuthProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );

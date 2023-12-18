@@ -5,6 +5,9 @@ export default {
   darkMode: ["class"],
   content: ["./src/**/*.{ts,tsx}"],
   theme: {
+    fontFamily: {
+      sans: ["Inter", "sans-serif"],
+    },
     container: {
       center: true,
       padding: "2rem",
