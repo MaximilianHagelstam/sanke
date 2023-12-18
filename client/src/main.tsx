@@ -9,6 +9,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RequireGuest } from "./components/require-guest";
 
 const queryClient = new QueryClient();
 
@@ -16,18 +17,28 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <Layout>
-        <LandingPage />
-      </Layout>
+      <RequireGuest>
+        <Layout>
+          <LandingPage />
+        </Layout>
+      </RequireGuest>
     ),
   },
   {
     path: "/login",
-    element: <Login />,
+    element: (
+      <RequireGuest>
+        <Login />
+      </RequireGuest>
+    ),
   },
   {
     path: "/register",
-    element: <h1>Register</h1>,
+    element: (
+      <RequireGuest>
+        <h1>Register</h1>
+      </RequireGuest>
+    ),
   },
   {
     path: "/projects",
