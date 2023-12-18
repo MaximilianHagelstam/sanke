@@ -1,5 +1,5 @@
+import { useAuth } from "@/providers/auth-provider";
 import { Navigate } from "react-router-dom";
-import { useAuth } from "../providers/auth-provider";
 
 type RequireGuestProps = { children: JSX.Element };
 

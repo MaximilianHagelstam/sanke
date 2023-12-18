@@ -1,27 +1,25 @@
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { login } from "@/data/user";
+import { register } from "@/data/user";
 import { cn } from "@/lib/utils";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { ChevronLeft, Loader2 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
-type LoginFormInput = {
+type RegisterFormInput = {
   username: string;
   password: string;
 };
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: ({ username, password }: LoginFormInput) =>
-      login(username, password),
+    mutationFn: ({ username, password }: RegisterFormInput) =>
+      register(username, password),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["user"] });
-      navigate("/projects");
+      navigate("/login");
     },
   });
 
@@ -70,40 +68,40 @@ const LoginForm = () => {
         {mutation.isPending && (
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
         )}
-        Sign In
+        Sign Up
       </Button>
     </form>
   );
 };
 
-export const Login = () => {
+export const Register = () => {
   return (
     <div className="container flex h-screen w-screen flex-col items-center justify-center">
       <Link
-        to="/"
+        to="/login"
         className={cn(
           buttonVariants({ variant: "ghost" }),
           "absolute left-4 top-4 md:left-8 md:top-8"
         )}
       >
         <ChevronLeft className="mr-2 h-4 w-4" />
-        <span>Back</span>
+        <span>Login</span>
       </Link>
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
         <div className="flex flex-col space-y-2 text-center">
           <h1 className="text-2xl font-semibold tracking-tight">
-            Welcome back
+            Create an account
           </h1>
           <p className="text-sm text-slate-500">
-            Enter your username to sign in to your account
+            Enter a username to create your account
           </p>
         </div>
-        <LoginForm />
+        <RegisterForm />
         <Link
-          to="/register"
+          to="/login"
           className="text-center text-sm text-slate-500 underline underline-offset-4 hover:text-slate-600 dark:hover:text-slate-400"
         >
-          Don&apos;t have an account? Sign Up
+          Already have an account? Login
         </Link>
       </div>
     </div>

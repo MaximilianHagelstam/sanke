@@ -1,7 +1,9 @@
 import { LandingPage } from "@/components/landing-page";
 import { Layout } from "@/components/layout";
 import { Login } from "@/components/login";
+import { Register } from "@/components/register";
 import { RequireAuth } from "@/components/require-auth";
+import { RequireGuest } from "@/components/require-guest";
 import "@/index.css";
 import { AuthProvider } from "@/providers/auth-provider";
 import { ThemeProvider } from "@/providers/theme-provider";
@@ -9,7 +11,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { RequireGuest } from "./components/require-guest";
 
 const queryClient = new QueryClient();
 
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
     path: "/register",
     element: (
       <RequireGuest>
-        <h1>Register</h1>
+        <Register />
       </RequireGuest>
     ),
   },
@@ -44,7 +45,9 @@ const router = createBrowserRouter([
     path: "/projects",
     element: (
       <RequireAuth>
-        <h1>Projects</h1>
+        <Layout>
+          <h1>Projects</h1>
+        </Layout>
       </RequireAuth>
     ),
   },
