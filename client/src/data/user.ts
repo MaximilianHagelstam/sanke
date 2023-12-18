@@ -12,10 +12,10 @@ export const getCurrentUser = async (): Promise<User> => {
   });
   if (!res.ok) throw new Error("Error fetching user");
 
-  const user = (await res.json()) as User | null;
-  if (!user) throw new Error("Error fetching user");
+  const data = (await res.json()) as { user: User | null };
+  if (!data.user) throw new Error("Error fetching user");
 
-  return user;
+  return data.user;
 };
 
 export const login = async (
