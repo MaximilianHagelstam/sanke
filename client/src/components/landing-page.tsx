@@ -8,7 +8,7 @@ export const LandingPage = () => {
         <h1 className="text-3xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
           Welcome to Sanke
         </h1>
-        <p className="max-w-[42rem] leading-normal text-gray-500 sm:text-xl sm:leading-8">
+        <p className="max-w-[42rem] leading-normal text-slate-500 sm:text-xl sm:leading-8">
           I'm building a project management tool and open sourcing everything.
           Follow along as we figure this out together.
         </p>
