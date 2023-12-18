@@ -1,5 +1,6 @@
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
 
 export const LandingPage = () => {
   return (
@@ -13,17 +14,17 @@ export const LandingPage = () => {
           Follow along as we figure this out together.
         </p>
         <div className="space-x-4">
-          <a href="/login" className={cn(buttonVariants({ size: "lg" }))}>
+          <Link to="/login" className={cn(buttonVariants({ size: "lg" }))}>
             Get Started
-          </a>
-          <a
-            href="https://github.com/MaximilianHagelstam/sanke"
+          </Link>
+          <Link
+            to="https://github.com/MaximilianHagelstam/sanke"
             target="_blank"
             rel="noreferrer"
             className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
           >
             GitHub
-          </a>
+          </Link>
         </div>
       </div>
     </section>
