@@ -1,5 +1,9 @@
 import express from "express";
-import { createProject, getProjects } from "../controllers/projectController";
+import {
+  createProject,
+  deleteProject,
+  getProjects,
+} from "../controllers/projectController";
 import { auth } from "../middleware/auth";
 import { validateRequest } from "../middleware/validateRequest";
 import { createProjectSchema } from "../validators/projectValidation";
@@ -13,5 +17,6 @@ projectRouter.post(
   validateRequest(createProjectSchema),
   createProject
 );
+projectRouter.delete("/:id", auth, deleteProject);
 
 export default projectRouter;
