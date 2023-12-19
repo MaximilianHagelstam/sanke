@@ -1,5 +1,6 @@
 import { Project } from "@/interfaces/Project";
 import { formatDate } from "@/lib/utils";
+import { ProjectOperations } from "./project-operations";
 
 type ProjectItemProps = {
   project: Project;
@@ -18,6 +19,7 @@ export const ProjectItem = ({ project }: ProjectItemProps) => {
           </p>
         </div>
       </div>
+      <ProjectOperations />
     </div>
   );
 };

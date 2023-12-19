@@ -31,7 +31,7 @@ export const Projects = () => {
       </div>
       <div>
         {projects.length ? (
-          <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-4">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {projects.map((project) => (
               <ProjectItem key={project.id} project={project} />
             ))}
