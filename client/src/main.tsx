@@ -1,6 +1,7 @@
 import { LandingPage } from "@/components/landing-page";
 import { Layout } from "@/components/layout";
 import { Login } from "@/components/login";
+import { Projects } from "@/components/projects";
 import { Register } from "@/components/register";
 import { RequireAuth } from "@/components/require-auth";
 import { RequireGuest } from "@/components/require-guest";
@@ -46,7 +47,7 @@ const router = createBrowserRouter([
     element: (
       <RequireAuth>
         <Layout>
-          <h1>Projects</h1>
+          <Projects />
         </Layout>
       </RequireAuth>
     ),
