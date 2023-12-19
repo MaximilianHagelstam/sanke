@@ -10,7 +10,7 @@ export const LandingPage = () => {
           Software project management{" "}
           <span className="underline">simplified.</span>
         </h1>
-        <p className="max-w-[42rem] leading-normal text-slate-500 sm:text-xl sm:leading-8">
+        <p className="max-w-[42rem] leading-normal text-slate-500 dark:text-slate-400 sm:text-xl sm:leading-8">
           Simplify project management with a straightforward tool. No-nonsense
           efficiency for achieving your goals effortlessly.
         </p>

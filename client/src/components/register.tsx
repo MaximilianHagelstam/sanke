@@ -92,14 +92,14 @@ export const Register = () => {
           <h1 className="text-2xl font-semibold tracking-tight">
             Create an account
           </h1>
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-slate-500 dark:text-slate-400">
             Enter a username to create your account
           </p>
         </div>
         <RegisterForm />
         <Link
           to="/login"
-          className="text-center text-sm text-slate-500 underline underline-offset-4 hover:text-slate-600 dark:hover:text-slate-400"
+          className="text-center text-sm text-slate-500 underline underline-offset-4 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300"
         >
           Already have an account? Login
         </Link>

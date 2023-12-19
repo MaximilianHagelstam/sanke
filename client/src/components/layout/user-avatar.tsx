@@ -52,10 +52,7 @@ export const UserAvatar = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end">
         <div className="flex items-center justify-start gap-2 p-2">
-          <div className="flex flex-col space-y-1 leading-none">
-            <p className="font-medium">Display name</p>
-            <p className="text-sm text-slate-500">{`@${user.username}`}</p>
-          </div>
+          <p className="font-medium">{`@${user.username}`}</p>
         </div>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
