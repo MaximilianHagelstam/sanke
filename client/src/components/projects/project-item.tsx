@@ -19,7 +19,7 @@ export const ProjectItem = ({ project }: ProjectItemProps) => {
           </p>
         </div>
       </div>
-      <ProjectOperations />
+      <ProjectOperations projectId={project.id} />
     </div>
   );
 };

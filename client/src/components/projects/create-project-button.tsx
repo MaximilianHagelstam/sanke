@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useToast } from "@/components/ui/use-toast";
 import { createProject } from "@/data/project";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Loader2, Plus } from "lucide-react";
@@ -27,6 +28,7 @@ type CreateProjectButtonProps = {
 
 export const CreateProjectButton = ({ variant }: CreateProjectButtonProps) => {
   const queryClient = useQueryClient();
+  const { toast } = useToast();
   const [isOpen, setIsOpen] = useState(false);
 
   const mutation = useMutation({
@@ -34,6 +36,10 @@ export const CreateProjectButton = ({ variant }: CreateProjectButtonProps) => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["projects"] });
       setIsOpen(false);
+      toast({ title: "Successfully created project" });
+    },
+    onError: () => {
+      toast({ title: "Error creating project" });
     },
   });
 

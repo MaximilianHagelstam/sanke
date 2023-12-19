@@ -16,12 +16,32 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useToast } from "@/components/ui/use-toast";
+import { deleteProject } from "@/data/project";
 import { cn } from "@/lib/utils";
-import { MoreVertical, Trash } from "lucide-react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Loader2, MoreVertical, Trash } from "lucide-react";
 import { useState } from "react";
 
-export const ProjectOperations = () => {
+type ProjectOperationsProps = {
+  projectId: string;
+};
+
+export const ProjectOperations = ({ projectId }: ProjectOperationsProps) => {
+  const queryClient = useQueryClient();
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
+  const { toast } = useToast();
+
+  const mutation = useMutation({
+    mutationFn: () => deleteProject(projectId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["projects"] });
+      toast({ title: "Successfully deleted project" });
+    },
+    onError: () => {
+      toast({ title: "Error deleting project" });
+    },
+  });
 
   return (
     <>
@@ -54,9 +74,14 @@ export const ProjectOperations = () => {
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
+              onClick={() => mutation.mutate()}
               className={cn(buttonVariants({ variant: "destructive" }))}
             >
-              <Trash className="mr-2 h-4 w-4" />
+              {mutation.isPending ? (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              ) : (
+                <Trash className="mr-2 h-4 w-4" />
+              )}
               <span>Delete</span>
             </AlertDialogAction>
           </AlertDialogFooter>

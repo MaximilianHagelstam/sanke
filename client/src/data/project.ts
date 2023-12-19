@@ -28,3 +28,14 @@ export const createProject = async (title: string): Promise<void> => {
   });
   if (!res.ok) throw new Error("Error creating project");
 };
+
+export const deleteProject = async (id: string): Promise<void> => {
+  const userToken = getUserToken();
+  const res = await fetch(`${API_URL}/api/projects/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+    },
+  });
+  if (!res.ok) throw new Error("Error deleting project");
+};

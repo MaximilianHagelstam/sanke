@@ -5,6 +5,7 @@ import { Projects } from "@/components/projects";
 import { Register } from "@/components/register";
 import { RequireAuth } from "@/components/require-auth";
 import { RequireGuest } from "@/components/require-guest";
+import { Toaster } from "@/components/ui/toaster";
 import "@/index.css";
 import { AuthProvider } from "@/providers/auth-provider";
 import { ThemeProvider } from "@/providers/theme-provider";
@@ -65,6 +66,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <AuthProvider>
           <div className="min-h-screen w-full bg-white font-sans text-slate-950 antialiased dark:bg-slate-950 dark:text-slate-50">
             <RouterProvider router={router} />
+            <Toaster />
           </div>
         </AuthProvider>
       </ThemeProvider>
