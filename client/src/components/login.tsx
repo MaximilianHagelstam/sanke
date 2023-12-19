@@ -94,14 +94,14 @@ export const Login = () => {
           <h1 className="text-2xl font-semibold tracking-tight">
             Welcome back
           </h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400">
+          <p className="text-sm text-gray-500 dark:text-gray-400">
             Enter your username to sign in to your account
           </p>
         </div>
         <LoginForm />
         <Link
           to="/register"
-          className="text-center text-sm text-slate-500 underline underline-offset-4 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300"
+          className="text-center text-sm text-gray-500 underline underline-offset-4 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
         >
           Don&apos;t have an account? Sign Up
         </Link>

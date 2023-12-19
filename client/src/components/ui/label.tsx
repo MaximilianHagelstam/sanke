@@ -18,7 +18,7 @@ const Label = React.forwardRef<
     className={cn(
       labelVariants(),
       className,
-      "text-slate-950 dark:text-slate-50"
+      "text-gray-950 dark:text-gray-50"
     )}
     {...props}
   />

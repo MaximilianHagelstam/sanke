@@ -46,7 +46,7 @@ export const ProjectOperations = ({ projectId }: ProjectOperationsProps) => {
   return (
     <>
       <DropdownMenu>
-        <DropdownMenuTrigger className="flex h-8 w-8 items-center justify-center rounded-md border border-slate-200 transition-colors hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-900">
+        <DropdownMenuTrigger className="flex h-8 w-8 items-center justify-center rounded-md border border-gray-200 transition-colors hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-gray-900">
           <MoreVertical className="h-4 w-4" />
           <span className="sr-only">Open</span>
         </DropdownMenuTrigger>

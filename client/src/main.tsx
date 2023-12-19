@@ -64,7 +64,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <AuthProvider>
-          <div className="min-h-screen w-full bg-white font-sans text-slate-950 antialiased dark:bg-slate-950 dark:text-slate-50">
+          <div className="min-h-screen w-full bg-white font-sans text-gray-950 antialiased dark:bg-gray-950 dark:text-gray-50">
             <RouterProvider router={router} />
             <Toaster />
           </div>
