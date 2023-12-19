@@ -16,10 +16,6 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    displayName: {
-      type: String,
-      required: true,
-    },
     projects: [
       {
         type: Schema.Types.ObjectId,

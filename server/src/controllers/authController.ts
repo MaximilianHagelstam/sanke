@@ -24,7 +24,6 @@ export const register = async (req: Request, res: Response) => {
     username,
     password: passwordHash,
     avatar,
-    displayName: username,
   });
 
   logger.info(`Registered user @${user.username}`);
