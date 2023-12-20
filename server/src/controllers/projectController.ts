@@ -33,11 +33,11 @@ export const deleteProject = async (req: Request, res: Response) => {
   const projectId = req.params.id;
 
   const isValidId = mongoose.Types.ObjectId.isValid(projectId);
-  if (!isValidId) return res.status(401).json({ error: "invalid id" });
+  if (!isValidId) return res.status(400).json({ error: "invalid id" });
 
   const project = await Project.findById(projectId).populate("user");
   if (!project || project?.user?.id.toString() !== String(user.id))
-    return res.status(401).json({ error: "not authorized to delete project" });
+    return res.status(400).json({ error: "invalid id" });
 
   await Project.findByIdAndDelete(project.id);
 
