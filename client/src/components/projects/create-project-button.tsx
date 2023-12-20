@@ -32,14 +32,17 @@ export const CreateProjectButton = ({ variant }: CreateProjectButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const mutation = useMutation({
-    mutationFn: ({ title }: { title: string }) => createProject(title),
+    mutationFn: ({ title }: { title: string }) => {
+      if (title.trim().length === 0) throw Error("Invalid project name");
+      return createProject(title);
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["projects"] });
       setIsOpen(false);
-      toast({ title: "Successfully created project" });
+      toast({ title: "Created project" });
     },
-    onError: () => {
-      toast({ title: "Error creating project" });
+    onError: (error) => {
+      toast({ title: error.message });
     },
   });
 
@@ -77,9 +80,6 @@ export const CreateProjectButton = ({ variant }: CreateProjectButtonProps) => {
           <div className="grid gap-2">
             <Label htmlFor="title">Project Name</Label>
             <Input id="title" type="text" maxLength={30} required />
-            {mutation.isError && (
-              <p className="text-xs text-red-600">{mutation.error.message}</p>
-            )}
           </div>
         </form>
         <DialogFooter>

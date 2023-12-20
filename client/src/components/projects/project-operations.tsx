@@ -36,10 +36,10 @@ export const ProjectOperations = ({ projectId }: ProjectOperationsProps) => {
     mutationFn: () => deleteProject(projectId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["projects"] });
-      toast({ title: "Successfully deleted project" });
+      toast({ title: "Deleted project" });
     },
-    onError: () => {
-      toast({ title: "Error deleting project" });
+    onError: (error) => {
+      toast({ title: error.message });
     },
   });
 

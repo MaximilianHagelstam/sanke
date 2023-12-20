@@ -15,8 +15,6 @@ export const Projects = () => {
     queryFn: getProjects,
   });
 
-  if (isPending) return <h1>Loading...</h1>;
-
   if (isError) return <h1>Error</h1>;
 
   return (
