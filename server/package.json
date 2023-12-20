@@ -6,7 +6,7 @@
     "dev": "cross-env NODE_ENV=development ts-node-dev --transpile-only src/index.ts",
     "build": "tsc",
     "lint": "eslint ./src",
-    "test": "cross-env NODE_ENV=testing jest --coverage",
+    "test": "cross-env NODE_ENV=testing jest --coverage --runInBand",
     "format": "prettier --write ./src",
     "clean": "rm -rf coverage dist node_modules"
   },
