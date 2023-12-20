@@ -1,9 +1,11 @@
 import { LandingPage } from "@/components/landing-page";
 import { Layout } from "@/components/layout";
 import { Login } from "@/components/login";
+import { Projects } from "@/components/projects";
 import { Register } from "@/components/register";
 import { RequireAuth } from "@/components/require-auth";
 import { RequireGuest } from "@/components/require-guest";
+import { Toaster } from "@/components/ui/toaster";
 import "@/index.css";
 import { AuthProvider } from "@/providers/auth-provider";
 import { ThemeProvider } from "@/providers/theme-provider";
@@ -46,7 +48,7 @@ const router = createBrowserRouter([
     element: (
       <RequireAuth>
         <Layout>
-          <h1>Projects</h1>
+          <Projects />
         </Layout>
       </RequireAuth>
     ),
@@ -62,8 +64,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <AuthProvider>
-          <div className="min-h-screen w-full bg-white font-sans text-slate-950 antialiased dark:bg-slate-950 dark:text-slate-50">
+          <div className="min-h-screen w-full bg-white font-sans text-gray-950 antialiased dark:bg-gray-950 dark:text-gray-50">
             <RouterProvider router={router} />
+            <Toaster />
           </div>
         </AuthProvider>
       </ThemeProvider>

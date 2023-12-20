@@ -13,7 +13,7 @@ const initialUser = {
 };
 
 beforeAll(async () => {
-  await User.deleteMany();
+  await User.deleteMany({});
   const passwordHash = await bcrypt.hash(initialUser.password, 10);
   await User.create({
     username: initialUser.username,
@@ -24,27 +24,33 @@ beforeAll(async () => {
 
 describe("POST /api/auth/register", () => {
   test("Should successfully register a user", async () => {
-    const res = await api.post("/api/auth/register").send({
-      username: "testuser",
-      password: "testpassword123",
-    });
-    expect(res.statusCode).toBe(201);
+    await api
+      .post("/api/auth/register")
+      .send({
+        username: "testuser",
+        password: "testpassword123",
+      })
+      .expect(201);
   });
 
   test("Should return error if user already exists", async () => {
-    const res = await api.post("/api/auth/register").send({
-      username: initialUser.username,
-      password: initialUser.password,
-    });
-    expect(res.statusCode).toBe(400);
+    await api
+      .post("/api/auth/register")
+      .send({
+        username: initialUser.username,
+        password: initialUser.password,
+      })
+      .expect(400);
   });
 
   test("Should return error if password is too short", async () => {
-    const res = await api.post("/api/auth/register").send({
-      username: "testuser2",
-      password: "test",
-    });
-    expect(res.statusCode).toBe(400);
+    await api
+      .post("/api/auth/register")
+      .send({
+        username: "testuser2",
+        password: "test",
+      })
+      .expect(400);
   });
 });
 
@@ -59,16 +65,18 @@ describe("POST /api/auth/login", () => {
   });
 
   test("Should return error if username or password is wrong", async () => {
-    const res = await api.post("/api/auth/login").send({
-      username: initialUser.username,
-      password: "test",
-    });
-    expect(res.statusCode).toBe(400);
+    await api
+      .post("/api/auth/login")
+      .send({
+        username: initialUser.username,
+        password: "test",
+      })
+      .expect(400);
   });
 });
 
-describe("Auth middleware", () => {
-  test("GET /me should return logged in user", async () => {
+describe("GET /api/auth/me", () => {
+  test("Should return logged in user", async () => {
     const loginRes = await api.post("/api/auth/login").send({
       username: initialUser.username,
       password: initialUser.password,
@@ -83,9 +91,8 @@ describe("Auth middleware", () => {
     expect(res.body.user.password).toBeUndefined();
   });
 
-  test("GET /me should return error if token is invalid", async () => {
-    const res = await api.get("/api/auth/me").set("Authorization", "test");
-    expect(res.statusCode).toBe(401);
+  test("Should return error if token is invalid", async () => {
+    await api.get("/api/auth/me").set("Authorization", "test").expect(401);
   });
 });
 

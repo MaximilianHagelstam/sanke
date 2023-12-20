@@ -7,6 +7,7 @@ export default {
   theme: {
     fontFamily: {
       sans: ["Inter", "sans-serif"],
+      heading: ["Cal Sans"],
     },
     container: {
       center: true,
