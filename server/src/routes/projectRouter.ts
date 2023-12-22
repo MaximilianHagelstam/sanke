@@ -2,6 +2,7 @@ import express from "express";
 import {
   createProject,
   deleteProject,
+  getProjectById,
   getProjects,
 } from "../controllers/projectController";
 import { auth } from "../middleware/auth";
@@ -18,5 +19,6 @@ projectRouter.post(
   createProject
 );
 projectRouter.delete("/:id", auth, deleteProject);
+projectRouter.get("/:id", auth, getProjectById);
 
 export default projectRouter;

@@ -44,3 +44,19 @@ export const deleteProject = async (req: Request, res: Response) => {
   logger.info(`Deleted project ${project.title}`);
   return res.status(204).end();
 };
+
+export const getProjectById = async (req: Request, res: Response) => {
+  const user = await User.findById(req.token.id);
+  if (!user) return res.status(401).json({ error: "unauthorized" });
+
+  const projectId = req.params.id;
+
+  const isValidId = mongoose.Types.ObjectId.isValid(projectId);
+  if (!isValidId) return res.status(400).json({ error: "invalid id" });
+
+  const project = await Project.findById(projectId).populate("user");
+  if (!project || project?.user?.id.toString() !== String(user.id))
+    return res.status(400).json({ error: "invalid id" });
+
+  return res.status(200).json({ project });
+};
