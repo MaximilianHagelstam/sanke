@@ -65,6 +65,27 @@ describe("GET /api/projects", () => {
   });
 });
 
+describe("GET /api/projects/:id", () => {
+  test("Should return project", async () => {
+    const projects = await Project.find();
+    const projectId = projects[0]._id.toString();
+
+    const res = await api
+      .get(`/api/projects/${projectId}`)
+      .set("Authorization", `Bearer ${token}`);
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body.project.id).toBe(projectId);
+  });
+
+  test("Should return error if id is invalid", async () => {
+    await api
+      .get("/api/projects/123")
+      .set("Authorization", `Bearer ${token}`)
+      .expect(400);
+  });
+});
+
 describe("DELETE /api/projects/:id", () => {
   test("Should delete project", async () => {
     const initialProjects = await Project.find();
