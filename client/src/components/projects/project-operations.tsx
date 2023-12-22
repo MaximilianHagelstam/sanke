@@ -76,6 +76,7 @@ export const ProjectOperations = ({ projectId }: ProjectOperationsProps) => {
             <AlertDialogAction
               onClick={() => mutation.mutate()}
               className={cn(buttonVariants({ variant: "destructive" }))}
+              disabled={mutation.isPending}
             >
               {mutation.isPending ? (
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />

@@ -83,7 +83,11 @@ export const CreateProjectButton = ({ variant }: CreateProjectButtonProps) => {
           </div>
         </form>
         <DialogFooter>
-          <Button form="createProjectForm" type="submit">
+          <Button
+            form="createProjectForm"
+            type="submit"
+            disabled={mutation.isPending}
+          >
             {mutation.isPending && (
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
             )}
