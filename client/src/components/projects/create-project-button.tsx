@@ -32,10 +32,7 @@ export const CreateProjectButton = ({ variant }: CreateProjectButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const mutation = useMutation({
-    mutationFn: ({ title }: { title: string }) => {
-      if (title.trim().length === 0) throw Error("Invalid project name");
-      return createProject(title);
-    },
+    mutationFn: ({ title }: { title: string }) => createProject(title),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["projects"] });
       setIsOpen(false);
