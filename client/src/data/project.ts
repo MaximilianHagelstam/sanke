@@ -39,3 +39,16 @@ export const deleteProject = async (id: string): Promise<void> => {
   });
   if (!res.ok) throw new Error("Error deleting project");
 };
+
+export const getProjectById = async (id: string): Promise<Project> => {
+  const userToken = getUserToken();
+  const res = await fetch(`${API_URL}/api/projects/${id}`, {
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+    },
+  });
+  if (!res.ok) throw new Error("Error fetching project");
+
+  const data = (await res.json()) as { project: Project };
+  return data.project;
+};

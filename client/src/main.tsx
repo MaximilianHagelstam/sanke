@@ -1,6 +1,7 @@
 import { LandingPage } from "@/components/landing-page";
 import { Layout } from "@/components/layout";
 import { Login } from "@/components/login";
+import { ProjectBoard } from "@/components/project-board";
 import { Projects } from "@/components/projects";
 import { Register } from "@/components/register";
 import { RequireAuth } from "@/components/require-auth";
@@ -49,6 +50,16 @@ const router = createBrowserRouter([
       <RequireAuth>
         <Layout>
           <Projects />
+        </Layout>
+      </RequireAuth>
+    ),
+  },
+  {
+    path: "/project/:id",
+    element: (
+      <RequireAuth>
+        <Layout>
+          <ProjectBoard />
         </Layout>
       </RequireAuth>
     ),
