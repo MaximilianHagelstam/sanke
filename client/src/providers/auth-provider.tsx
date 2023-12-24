@@ -8,29 +8,26 @@ type AuthProviderProps = {
 };
 
 type AuthProviderState = {
-  user: User | null;
+  user: User | undefined;
   isLoading: boolean;
 };
 
 const initialState: AuthProviderState = {
-  user: null,
+  user: undefined,
   isLoading: false,
 };
 
 const AuthProviderContext = createContext<AuthProviderState>(initialState);
 
-export const AuthProvider = ({ children, ...props }: AuthProviderProps) => {
-  const { data, isPending } = useQuery({
+export const AuthProvider = ({ children }: AuthProviderProps) => {
+  const { data: user, isPending } = useQuery({
     queryKey: ["user"],
     queryFn: getCurrentUser,
     retry: false,
   });
 
   return (
-    <AuthProviderContext.Provider
-      {...props}
-      value={{ user: data ? data : null, isLoading: isPending }}
-    >
+    <AuthProviderContext.Provider value={{ user, isLoading: isPending }}>
       {children}
     </AuthProviderContext.Provider>
   );

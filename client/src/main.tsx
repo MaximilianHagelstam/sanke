@@ -1,11 +1,10 @@
+import { Login } from "@/components/auth/login";
+import { Register } from "@/components/auth/register";
 import { LandingPage } from "@/components/landing-page";
 import { Layout } from "@/components/layout";
-import { Login } from "@/components/login";
 import { ProjectBoard } from "@/components/project-board";
 import { Projects } from "@/components/projects";
-import { Register } from "@/components/register";
 import { RequireAuth } from "@/components/require-auth";
-import { RequireGuest } from "@/components/require-guest";
 import { Toaster } from "@/components/ui/toaster";
 import "@/index.css";
 import { AuthProvider } from "@/providers/auth-provider";
@@ -20,49 +19,35 @@ const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <RequireGuest>
-        <Layout>
-          <LandingPage />
-        </Layout>
-      </RequireGuest>
-    ),
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <LandingPage />,
+      },
+      {
+        path: "projects",
+        element: <RequireAuth />,
+        children: [
+          {
+            index: true,
+            element: <Projects />,
+          },
+          {
+            path: ":id",
+            element: <ProjectBoard />,
+          },
+        ],
+      },
+    ],
   },
   {
     path: "/login",
-    element: (
-      <RequireGuest>
-        <Login />
-      </RequireGuest>
-    ),
+    element: <Login />,
   },
   {
     path: "/register",
-    element: (
-      <RequireGuest>
-        <Register />
-      </RequireGuest>
-    ),
-  },
-  {
-    path: "/projects",
-    element: (
-      <RequireAuth>
-        <Layout>
-          <Projects />
-        </Layout>
-      </RequireAuth>
-    ),
-  },
-  {
-    path: "/project/:id",
-    element: (
-      <RequireAuth>
-        <Layout>
-          <ProjectBoard />
-        </Layout>
-      </RequireAuth>
-    ),
+    element: <Register />,
   },
   {
     path: "*",

@@ -12,7 +12,7 @@ export const ProjectItem = ({ project }: ProjectItemProps) => {
     <div className="flex items-center justify-between rounded-md border border-gray-200 p-4 dark:border-gray-800">
       <div className="grid gap-1">
         <Link
-          to={`/project/${project.id}`}
+          to={`/projects/${project.id}`}
           className="truncate font-semibold hover:underline"
         >
           {project.title}
