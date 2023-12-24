@@ -1,5 +1,6 @@
 import { Login } from "@/components/auth/login";
 import { Register } from "@/components/auth/register";
+import { ErrorPage } from "@/components/error-page";
 import { LandingPage } from "@/components/landing-page";
 import { Layout } from "@/components/layout";
 import { ProjectBoard } from "@/components/project-board";
@@ -12,14 +13,18 @@ import { ThemeProvider } from "@/providers/theme-provider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <Layout>
+        <Outlet />
+      </Layout>
+    ),
     children: [
       {
         index: true,
@@ -51,7 +56,16 @@ const router = createBrowserRouter([
   },
   {
     path: "*",
-    element: <h1>404 - Not Found</h1>,
+    element: (
+      <Layout>
+        <ErrorPage
+          title="404"
+          description="The page you are looking for doesn't exist."
+          buttonText="Go Back"
+          onClick={() => (window.location.href = "/")}
+        />
+      </Layout>
+    ),
   },
 ]);
 

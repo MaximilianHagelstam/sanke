@@ -1,3 +1,4 @@
+import { ErrorPage } from "@/components/error-page";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getProjects } from "@/data/project";
 import { useQuery } from "@tanstack/react-query";
@@ -15,7 +16,15 @@ export const Projects = () => {
     queryFn: getProjects,
   });
 
-  if (isError) return <h1>Error</h1>;
+  if (isError)
+    return (
+      <ErrorPage
+        title="Error"
+        description="There was an error fetching projects."
+        buttonText="Try Again"
+        onClick={() => window.location.reload()}
+      />
+    );
 
   return (
     <div className="grid items-start gap-8">
