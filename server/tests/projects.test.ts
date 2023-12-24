@@ -33,7 +33,7 @@ beforeAll(async () => {
 });
 
 describe("POST /api/projects", () => {
-  test("Should successfully create a project", async () => {
+  test("creates a project", async () => {
     await api
       .post("/api/projects")
       .send({
@@ -43,7 +43,7 @@ describe("POST /api/projects", () => {
       .expect(201);
   });
 
-  test("Should return error if title is missing", async () => {
+  test("returns error if title is missing", async () => {
     await api
       .post("/api/projects")
       .send({
@@ -55,7 +55,7 @@ describe("POST /api/projects", () => {
 });
 
 describe("GET /api/projects", () => {
-  test("Should return one project", async () => {
+  test("returns array of projects", async () => {
     const res = await api
       .get("/api/projects")
       .set("Authorization", `Bearer ${token}`);
@@ -66,7 +66,7 @@ describe("GET /api/projects", () => {
 });
 
 describe("GET /api/projects/:id", () => {
-  test("Should return project", async () => {
+  test("returns one project", async () => {
     const projects = await Project.find();
     const projectId = projects[0]._id.toString();
 
@@ -78,7 +78,7 @@ describe("GET /api/projects/:id", () => {
     expect(res.body.project.id).toBe(projectId);
   });
 
-  test("Should return error if id is invalid", async () => {
+  test("returns error if id is invalid", async () => {
     await api
       .get("/api/projects/123")
       .set("Authorization", `Bearer ${token}`)
@@ -87,7 +87,7 @@ describe("GET /api/projects/:id", () => {
 });
 
 describe("DELETE /api/projects/:id", () => {
-  test("Should delete project", async () => {
+  test("deletes project", async () => {
     const initialProjects = await Project.find();
     const projectId = initialProjects[0]._id.toString();
 
@@ -101,7 +101,7 @@ describe("DELETE /api/projects/:id", () => {
     expect(projects.length).toBe(0);
   });
 
-  test("Should return error if id is invalid", async () => {
+  test("returns error if id is invalid", async () => {
     await api
       .delete("/api/projects/123")
       .set("Authorization", `Bearer ${token}`)

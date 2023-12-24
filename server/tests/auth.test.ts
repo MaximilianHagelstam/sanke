@@ -23,7 +23,7 @@ beforeAll(async () => {
 });
 
 describe("POST /api/auth/register", () => {
-  test("Should successfully register a user", async () => {
+  test("registers a user", async () => {
     await api
       .post("/api/auth/register")
       .send({
@@ -33,7 +33,7 @@ describe("POST /api/auth/register", () => {
       .expect(201);
   });
 
-  test("Should return error if user already exists", async () => {
+  test("returns error if user already exists", async () => {
     await api
       .post("/api/auth/register")
       .send({
@@ -43,7 +43,7 @@ describe("POST /api/auth/register", () => {
       .expect(400);
   });
 
-  test("Should return error if password is too short", async () => {
+  test("returns error if password is too short", async () => {
     await api
       .post("/api/auth/register")
       .send({
@@ -55,7 +55,7 @@ describe("POST /api/auth/register", () => {
 });
 
 describe("POST /api/auth/login", () => {
-  test("Should return a token after login", async () => {
+  test("returns JWT token", async () => {
     const res = await api.post("/api/auth/login").send({
       username: initialUser.username,
       password: initialUser.password,
@@ -64,7 +64,7 @@ describe("POST /api/auth/login", () => {
     expect(typeof res.body.token).toBe("string");
   });
 
-  test("Should return error if username or password is wrong", async () => {
+  test("returns error if username or password is wrong", async () => {
     await api
       .post("/api/auth/login")
       .send({
@@ -76,7 +76,7 @@ describe("POST /api/auth/login", () => {
 });
 
 describe("GET /api/auth/me", () => {
-  test("Should return logged in user", async () => {
+  test("returns logged in user", async () => {
     const loginRes = await api.post("/api/auth/login").send({
       username: initialUser.username,
       password: initialUser.password,
@@ -91,7 +91,7 @@ describe("GET /api/auth/me", () => {
     expect(res.body.user.password).toBeUndefined();
   });
 
-  test("Should return error if token is invalid", async () => {
+  test("returns error if token is invalid", async () => {
     await api.get("/api/auth/me").set("Authorization", "test").expect(401);
   });
 });
